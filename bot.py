@@ -1,37 +1,36 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
 import requests
+from bs4 import BeautifulSoup
 from twilio.twiml.messaging_response import MessagingResponse
 
 app = Flask(__name__)
 
 
-@app.route('/bot', methods=['POST'])
+@app.route("/bot", methods=["POST"])
 def bot():
-    print("entre")
-    incoming_msg = request.values.get('Body', '').lower()
-    print("ESTE ES EL MENSAJE ENTRANTE DESDE EL CHAT DE WHATSAPP")
-    print(incoming_msg)
     resp = MessagingResponse()
     msg = resp.message()
-    responded = False
-    if 'quote' in incoming_msg:
-        # return a quote
-        r = requests.get('https://api.quotable.io/random')
-        if r.status_code == 200:
-            data = r.json()
-            quote = f'{data["content"]} ({data["author"]})'
-        else:
-            quote = 'No puedo responder a esa peticion lo siento'
-        msg.body(quote)
-        responded = True
-    if 'cat' in incoming_msg:
-        # return a cat pic
-        msg.media('https://cataas.com/cat')
-        responded = True
-    if not responded:
-        msg.body('Solo tenemos imagenes de gatos lo sentimos')
-    return str(resp)
+    word = request.values.get("Body", "").lower()
+    url = f"https://www.amazon.com/-/es/s?k={word}&language=es"
+    headers = {"FUser":"An","user-agent":"an"}
+    response = requests.get(url,headers=headers)
+    if response.status_code == 200:
+        try:
+            soup = BeautifulSoup(response.content,"html.parser")
+            urls = soup.find("div", 
+                            attrs={"class":"s-main-slot s-result-list s-search-results sg-row"}
+                            ).find_all("a",attrs={"class":"a-link-normal a-text-normal"})
+            urls = ["https://www.amazon.com"+ item.get('href') for item in urls[:5] ]
+            response_final = "\n\n URL \n".join(urls)
+            msg.body(response_final)
+            return str(resp)
+        except:
+            msg.body(f"sin resultados para {word}")
+            return str(resp)
+    else:
+        msg.body('Lo sentimos , su busqueda no ha tenido resultados intente con otro articulo')
+        return str(resp)
+    
 
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     app.run(port=5000)
