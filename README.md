@@ -13,7 +13,8 @@ para esto se recomienda que en su instancia de aws ec2 configure una direccion i
  en mi caso he configurado una direccion ip elastica para que la direccion ip no cambie cada vez que reiniciemos la maquina aws 
 
 
-luego de tener el contenedor corriendo en su instancia de AWS EC2 en el puerto 5000 
+luego de tener el contenedor corriendo en su instancia de AWS EC2 en el puerto 5000 y haber agregado la ip a la configuracion  de twilio
+debera escribir atraves de whatsapp a este numero
 
 # +1 415 5238886
 
@@ -22,12 +23,12 @@ una vez agregado a whatsapp escribir como mensaje este codigo
 
 # join town-map
 
-y luego de esto podra escribir cualquier mensaje desde whatsapp e inmediatamente en los logs de la consola de 
-Flask debera poder visualizar el mensaje que ha sido enviado desde whatsapp
+y luego de esto podra escribir la palabra del producto que desea obtener el link de referencia en amazon
+por ejemplo:
+televisor
 
 
-actualmente el chatbot retorna imagenes aleatorias de gatos escribiendo la palabra cat
-y tambien retornara datos a whatsapp si escribe la palabra quote
+actualmente retorna la lista de 5 urls referentes al producto que busco en amazon de acuerdo a los resultados de amazon
 
 
 Nota:
