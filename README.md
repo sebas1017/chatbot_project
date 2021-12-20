@@ -26,7 +26,7 @@ una vez agregado a whatsapp escribir como mensaje este codigo
 y luego de esto podra escribir la palabra del producto que desea obtener el link de referencia en amazon
 por ejemplo:
 televisor
-
+ ![alt text](https://github.com/sebas1017/chatbot_project/blob/main/results.png/?raw=true)
 
 actualmente retorna la lista de 5 urls referentes al producto que busco en amazon de acuerdo a los resultados de amazon
 
