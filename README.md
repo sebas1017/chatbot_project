@@ -6,7 +6,7 @@ docker-compose up
 aqui es clave que anote la direccion ip publica de su maquina aws hacia el puerto 5000 y debera dirigirse  a la configuracion de twilio en el 
 sandbox de whatsapp para lo cual debio haberse logeado con una cuenta gratuita , y poner esa ip y puerto en la configuracion de twilio para mensajes entrantes
 para esto se recomienda que en su instancia de aws ec2 configure una direccion ip elastica
-
+ ![alt text](https://github.com/sebas1017/chatbot_project/blob/main/sandbox_configuration_whatsapp.png/?raw=true)
 
 
 luego de tener el contenedor corriendo en su instancia de AWS EC2 en el puerto 5000 
