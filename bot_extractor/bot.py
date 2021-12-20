@@ -15,7 +15,10 @@ def bot():
     msg = resp.message()
     word = request.values.get("Body", "").lower()
     url = f"https://www.amazon.com/-/es/s?k={word}&language=es"
-    headers = {"FUser":"An","user-agent":"an"}
+    headers = {
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36" ,
+    'referer':'https://www.google.com/'
+    }
     response = requests.get(url,headers=headers,timeout=10)
     logging.error(f"RESPONSE_STATUS_CODE {response.status_code}")
     if response.status_code == 200:
