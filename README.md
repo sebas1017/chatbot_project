@@ -2,37 +2,38 @@
 
 
 ejecutar en la raiz 
-./ngrok authtoken 22N8lcUc5fryVtkCeMrm47W4krl_3WCavMaM7Qa6h9BTq1kLa
+# ./ngrok authtoken 22N8lcUc5fryVtkCeMrm47W4krl_3WCavMaM7Qa6h9BTq1kLa
 
-luego ejecutar ./ngrok http 5000
+luego ejecutar 
+# ./ngrok http 5000
 
 luego crear entorno virtual del proyecto ( ubuntu)
 
-python3 -m venv venv
+# python3 -m venv venv
 
 activar el entorno
 
-source venv/bin/activate
+# source venv/bin/activate
 
 
 luego instalar dependencias
 
-pip install -r requirements.txt
+# pip install -r requirements.txt
 
 
 luego correr el script
 
-python3 bot.py
+# python3 bot.py
 
 Una vez realizado todo esto debe ir a whatsapp en su telefono movil y escribir al siguiente telefono
 
 
-+1 415 5238886
+# +1 415 5238886
 
 
 una vez agregado a whatsapp escribir como mensaje este codigo
 
-join town-map
+# join town-map
 
 y luego de esto podra escribir cualquier mensaje desde whatsapp e inmediatamente en los logs de la consola de 
 Flask debera poder visualizar el mensaje que ha sido enviado desde whatsapp
