@@ -2,10 +2,14 @@ from flask import Flask, request, jsonify
 import requests
 from bs4 import BeautifulSoup
 from twilio.twiml.messaging_response import MessagingResponse
-
 app = Flask(__name__)
 
 
+gunicorn_logger = logging.getLogger('gunicorn.error')
+app.logger.handlers = gunicorn_logger.handlers
+app.logger.setLevel(gunicorn_logger.level)
+
+app.logger.info("BOT AMAZON")
 @app.route("/bot", methods=["POST"])
 def bot():
     resp = MessagingResponse()
@@ -14,6 +18,7 @@ def bot():
     url = f"https://www.amazon.com/-/es/s?k={word}&language=es"
     headers = {"FUser":"An","user-agent":"an"}
     response = requests.get(url,headers=headers)
+    app.logger.debug(f"status_code_responde {response.status_code}")
     if response.status_code == 200:
         try:
             soup = BeautifulSoup(response.content,"html.parser")
