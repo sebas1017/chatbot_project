@@ -28,6 +28,7 @@ luego correr el script
 Una vez realizado todo esto debe ir a whatsapp en su telefono movil y escribir al siguiente telefono
 
 
+
 # +1 415 5238886
 
 
@@ -47,3 +48,14 @@ Nota:
 ngrok y python deben correr en el mismo puerto 5000 , esto no causara error ya que ngrok
 realizar una redireccion del trafico http atraves del tunel de twilio  hacia nuestro puerto local
 de nuestra maquina , todo esto por estar en la fase de desarrollo
+
+
+
+
+
+
+## EJECUTAR EN PRODUCCION (AWS EC2)
+
+docker-compose up
+
+y repetir los pasos de escribir al whatsapp el codigo de autenticacion y la palabra a buscar en el chat (pueden ser cualquier palabra ya que esto filtra y raspa los datos de amazon)
