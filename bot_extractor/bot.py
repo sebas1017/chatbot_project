@@ -16,7 +16,7 @@ def bot():
     word = request.values.get("Body", "").lower()
     url = f"https://www.amazon.com/-/es/s?k={word}&language=es"
     headers = ({'User-Agent':
-            'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36',
+            'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36',
             'Accept-Language': 'en-US, en;q=0.5'})
     response = requests.get(url,headers=headers,timeout=2)
     logging.error(f"RESPONSE_STATUS_CODE {response.status_code}")
