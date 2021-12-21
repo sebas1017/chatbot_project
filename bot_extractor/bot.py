@@ -41,6 +41,8 @@ def bot():
             logging.error(e)
             return str(resp)
     else:
+        logging.error("CONTENIDO DE LA RESPUESTA")
+        logging.error(response.content)
         msg.body('Lo sentimos , su busqueda no ha tenido resultados intente con otro articulo')
         return str(resp)
     
