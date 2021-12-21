@@ -38,6 +38,7 @@ def bot():
             msg.body(f"sin resultados para {word}")
             logging.error("Esta es la excepcion")
             logging.error(e)
+            logging.error(response.content)
             return str(resp)
     else:
         logging.error("CONTENIDO DE LA RESPUESTA")
