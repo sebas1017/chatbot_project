@@ -6,4 +6,6 @@ services:
     build: ./bot_extractor
     ports:
      - 5000:5000
+    expose:
+     - "5000"
     container_name: amazon_data_extraction_service
