@@ -2,7 +2,6 @@ version: '3'
 
 services:
   bot-service:
-    restart: always
     build: ./bot_extractor
     ports:
      - 5000:5000
