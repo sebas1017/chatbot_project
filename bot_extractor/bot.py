@@ -3,12 +3,26 @@ import requests
 from bs4 import BeautifulSoup
 import logging
 from twilio.twiml.messaging_response import MessagingResponse
+from random_user_agent.user_agent import UserAgent
+from random_user_agent.params import SoftwareName, OperatingSystem
 app = Flask(__name__)
 
 
+def random_agent():
+    # you can also import SoftwareEngine, HardwareType, SoftwareType, Popularity from random_user_agent.params
+    # you can also set number of user agents required by providing `limit` as parameter
+    software_names = [SoftwareName.CHROME.value]
+    operating_systems = [OperatingSystem.WINDOWS.value, OperatingSystem.LINUX.value]   
+    user_agent_rotator = UserAgent(software_names=software_names, operating_systems=operating_systems, limit=100)
+    # Get list of user agents.
+    user_agents = user_agent_rotator.get_user_agents()
 
+    # Get Random User Agent String.
+    user_agent = user_agent_rotator.get_random_user_agent()
+    return user_agent
 
 logging.error("AMAZON BOT")
+
 @app.route("/bot", methods=["POST"])
 def bot():
     resp = MessagingResponse()
@@ -16,7 +30,7 @@ def bot():
     word = request.values.get("Body", "").lower()
     url = f"https://www.amazon.com/-/es/s?k={word}&language=es"
     headers = ({'User-Agent':
-            'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36',
+            random_agent(),
             'Accept-Language': 'en-US, en;q=0.5'})
     response = requests.get(url,headers=headers,timeout=2)
     logging.error(f"RESPONSE_STATUS_CODE {response.status_code}")
