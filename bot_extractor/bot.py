@@ -19,24 +19,26 @@ def bot():
     "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36" ,
     'referer':'https://www.google.com/'
     }
-    response = requests.get(url,headers=headers,timeout=10)
+    response = requests.get(url,headers=headers,timeout=2)
     logging.error(f"RESPONSE_STATUS_CODE {response.status_code}")
     if response.status_code == 200:
         try:
             soup = BeautifulSoup(response.content,"html.parser")
             urls = soup.find("div", 
                             attrs={"class":"s-main-slot s-result-list s-search-results sg-row"}
-                            ).find_all("a",attrs={"class":"a-link-normal a-text-normal"})
+                            ).find_all("a",attrs={"class":["a-link-normal a-text-normal","a-link-normal s-underline-text s-underline-link-text a-text-normal"]})
             urls = ["https://www.amazon.com"+ item.get('href') for item in urls[:5] ]
-            response_final = "\n\n URL \n".join(urls)
+            size_url = len("\n\n URL \n".join(urls))
+            while size_url > 1600:
+                urls.pop(-1)
+                size_url-= len("\n\n URL \n".join(urls)) 
+            response_final  = "\n\n URL \n".join(urls)
             msg.body(response_final)
             return str(resp)
         except Exception as e:
             msg.body(f"sin resultados para {word}")
             logging.error("Esta es la excepcion")
             logging.error(e)
-            logging.error("Contenido de la respuesta")
-            logging.error(response.content)
             return str(resp)
     else:
         msg.body('Lo sentimos , su busqueda no ha tenido resultados intente con otro articulo')
