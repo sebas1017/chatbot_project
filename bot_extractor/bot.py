@@ -8,7 +8,9 @@ from random_user_agent.params import SoftwareName, OperatingSystem
 import random
 import time
 app = Flask(__name__)
-logging.error("AMAZON BOT")
+
+logging.basicConfig(level=logging.DEBUG)
+
 
 @app.route("/bot", methods=["POST"])
 def bot():
@@ -18,7 +20,6 @@ def bot():
     url = f"https://www.amazon.com/-/es/s?k={word}&language=es"
     headers = {'FUser': "An","user-agent":"an"}
     response = requests.get(url,headers=headers,timeout=2)
-    logging.error(f"RESPONSE_STATUS_CODE {response.status_code}")
     if response.status_code == 200:
         try:
             soup = BeautifulSoup(response.content,"html.parser")
@@ -35,17 +36,12 @@ def bot():
             return str(resp)
         except Exception as e:
             msg.body(f"sin resultados para {word}")
-            logging.error("Esta es la excepcion")
-            logging.error(e)
-            logging.error("Este es el contenido")
-            logging.error(response.content)
+            logging.debug("Esta es la excepcion")
+            logging.debug(e)
             return str(resp)
     else:
-        logging.error("CONTENIDO DE LA RESPUESTA")
-        logging.error(response.content)
         msg.body('Lo sentimos , su busqueda no ha tenido resultados intente con otro articulo')
         return str(resp)
     
-
 if __name__ == "__main__":
     app.run(host='0.0.0.0',port=5000)
